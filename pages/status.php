@@ -17,11 +17,14 @@ else {
     'body' => UARWAWS_S3_BUCKET,
   ));
   
-  / Connect to Amazon S3.
+  // Connect to Amazon S3.
   try {
     $s3 = new AmazonS3();
     $s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
-	
+	echo renderMsg('success', array(
+      'heading' => 'AmazonS3',
+      'body' => 'bucket exists = ' . $s3->if_bucket_exists(UARWAWS_S3_BUCKET),
+    ));
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
