@@ -16,6 +16,23 @@ else {
     'heading' => 'S3 Bucket name found:',
     'body' => UARWAWS_S3_BUCKET,
   ));
+  
+  / Connect to Amazon S3.
+  try {
+    $s3 = new AmazonS3();
+    $s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
+	echo renderMsg('success', array(
+      'heading' => 'AmazonS3',
+      'body' => 'bucket exists = ' . $s3->if_bucket_exists(UARWAWS_S3_BUCKET),
+    ));
+  }
+  catch (Exception $e) {
+    echo renderMsg('error', array(
+      'heading' => 'Unable to connect to Amazon S3!',
+      'body' => var_export($e->getMessage(), TRUE),
+    ));
+    return;
+  }
 }
 
 if (!UARWAWS_SQS_QUEUE) {
