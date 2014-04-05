@@ -96,6 +96,11 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // -- Salted MD5 with the file's original name, appended with the file format.
   $filename = md5(time() . $_FILES['image']['name']);
   $filename .= '.' . strtolower($imagick->getImageFormat());
+  
+  echo renderMsg('info', array(
+      'heading' => 'File',
+      'body' => 'file name = '.$filename,
+   ));
 
   // Upload file to S3.
   $s3_upload_response = $s3->create_object(UARWAWS_S3_BUCKET, $filename, array(
@@ -103,6 +108,11 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     'contentType' => $_FILES['image']['type'],
     'acl' => AmazonS3::ACL_PUBLIC,
   ));
+  
+    echo renderMsg('info', array(
+      'heading' => 'File',
+      'body' => 's3_upload_response = '.$s3_upload_response,
+   ));
   if ($s3_upload_response->isOK()) {
     echo renderMsg('success', array(
       'body' => 'Uploaded image to Amazon S3.',
