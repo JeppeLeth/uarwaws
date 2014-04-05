@@ -35,6 +35,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     // Connect to Amazon SNS.
     try {
       $sns = new AmazonSNS();
+      $sns->set_region(AmazonSNS::REGION_IRELAND);
     }
     catch (Exception $e) {
       echo renderMsg('error', array(
@@ -68,6 +69,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Connect to Amazon S3.
   try {
     $s3 = new AmazonS3();
+    $s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
@@ -105,6 +107,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Connect to Amazon SimpleDB.
   try {
     $sdb = new AmazonSDB();
+    $sdb->set_region(AmazonSDB::REGION_IRELAND);
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
@@ -141,6 +144,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Connect to Amazon Simple Queue Service.
   try {
     $sqs = new AmazonSQS();
+    $sqs->set_region(AmazonSQS::REGION_IRELAND);
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
@@ -169,6 +173,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Connect to Amazon CloudWatch.
   try {
     $cw = new AmazonCloudWatch();
+    $cw->set_region(AmazonCloudWatch::REGION_IRELAND);
   }
   catch (Exception $e) {
     echo renderMsg('error', array(

@@ -7,6 +7,7 @@
 // Connect to Amazon SimpleDB.
 try {
   $sdb = new AmazonSDB();
+  $sdb->set_region(AmazonSDB::REGION_IRELAND);
 }
 catch (Exception $e) {
   echo renderMsg('error', array(

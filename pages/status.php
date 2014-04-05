@@ -71,6 +71,7 @@ else {
 // Try to connect to Amazon EC2.
 try {
   $ec2 = new AmazonEC2();
+  $ec2->set_region(AmazonEC2::REGION_IRELAND);
 }
 catch (Exception $e) {
   echo renderMsg('error', array(
