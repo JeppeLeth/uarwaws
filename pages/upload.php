@@ -99,7 +99,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   
   echo renderMsg('info', array(
       'heading' => 'File',
-      'body' => 'file name = '.$filename,
+      'body' => 'file name = '.$filename . ' and temp_name = ' . $_FILES['image']['tmp_name'],
    ));
 
   // Upload file to S3.
