@@ -26,6 +26,11 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     $file_upload_success = FALSE;
   }
 
+  echo renderMsg('warning', array(
+      'heading' => 'INFO',
+      'body' => 'Test',
+    ));
+  
   if (!$file_upload_success) {
     echo renderMsg('error', array(
       'heading' => 'Unable to read uploaded file as an image!',
