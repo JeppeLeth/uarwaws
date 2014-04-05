@@ -28,7 +28,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
 
   echo renderMsg('warning', array(
       'heading' => 'INFO',
-      'body' => 'Test',
+      'body' => 'Test file upload = '.$file_upload_success,
     ));
   
   if (!$file_upload_success) {
