@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Show all watermarked images.
+ * Show all resized images.
  */
 
 // Connect to Amazon SimpleDB.
@@ -50,14 +50,14 @@ if ($select_response->isOK()) {
   // No items.
   else {
     echo renderMsg('info', array(
-      'heading' => 'No watermarked images found.',
+      'heading' => 'No resized images found.',
       'body' => 'If you have uploaded an image, remember to process it.',
     ));
   }
 }
 else {
   echo renderMsg('error', array(
-    'heading' => 'Unable to get watermarked images from SimpleDB!',
+    'heading' => 'Unable to get resized images from SimpleDB!',
     'body' => getAwsError($select_response),
   ));
   return;

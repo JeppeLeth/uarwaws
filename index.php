@@ -16,15 +16,15 @@ $menu_items = array(
   ),
   'show' => array(
     'label' => 'Show',
-    'desc' => 'Show all watermarked images',
+    'desc' => 'Show all resized images',
   ),
   'upload' => array(
     'label' => 'Upload',
-    'desc' => 'Upload files to be watermarked',
+    'desc' => 'Upload files to be resized',
   ),
   'process' => array(
     'label' => 'Process',
-    'desc' => 'Add watermarks to images',
+    'desc' => 'Resize images',
   ),
 );
 
@@ -40,7 +40,7 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Up and Running with Amazon Web Services</title>
+        <title>Image resizing AWS</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -68,7 +68,7 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="?q=<?php echo $menu_item_default; ?>">Up and Running with Amazon Web Services</a>
+                    <a class="brand" href="?q=<?php echo $menu_item_default; ?>">Image resizing AWS</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                           <?php

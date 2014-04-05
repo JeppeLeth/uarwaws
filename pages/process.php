@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Add watermarks to images.
+ * Resize images.
  */
 
 // ImageMagick is required to process images.
@@ -44,7 +44,7 @@ $image_filename = (string) $received_sqs_response->body->ReceiveMessageResult->M
 if (!$image_filename) {
   echo renderMsg('info', array(
     'heading' => 'No images to process.',
-    'body' => 'Upload images that need watermarking before processing the queue.',
+    'body' => 'Upload images that need resized before processing the queue.',
   ));
   return;
 }
@@ -76,7 +76,7 @@ catch (Exception $e) {
 $file_name_array = explode('.', $image_filename);
 $temporary_file_name = tempnam(sys_get_temp_dir(), array_pop($file_name_array));
 
-// Download image from S3 for watermarking.
+// Download image from S3 for resizing.
 $file_resource = fopen($temporary_file_name, 'w+');
 $s3_get_response = $s3->get_object(UARWAWS_S3_BUCKET, $image_filename, array(
   'fileDownload' => $temporary_file_name,
@@ -96,7 +96,7 @@ else {
   return;
 }
 
-// Get the content type of the file; required to upload watermarked image to S3.
+// Get the content type of the file; required to upload resized image to S3.
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 $content_type = finfo_file($finfo, $temporary_file_name);
 finfo_close($finfo);
