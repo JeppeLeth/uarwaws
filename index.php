@@ -101,7 +101,7 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
             <hr>
 
             <footer>
-                <p>&copy; lynda.com 2013</p>
+                <p>&copy; Jeppe Leth Nielsen</p>
             </footer>
 
         </div> <!-- /container -->
