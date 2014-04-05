@@ -23,7 +23,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     $file_upload_success = TRUE;
 	echo renderMsg('info', array(
       'heading' => 'INFO',
-      'body' => 'Test file upload success = ',
+      'body' => 'Test file upload success',
     ));
   }
   catch (Exception $e) {
@@ -117,6 +117,10 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   try {
     $sdb = new AmazonSDB();
     $sdb->set_region(AmazonSDB::REGION_IRELAND);
+	echo renderMsg('info', array(
+      'heading' => 'AmazonSDB',
+      'body' => 'passed',
+    ));
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
@@ -154,6 +158,10 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   try {
     $sqs = new AmazonSQS();
     $sqs->set_region(AmazonSQS::REGION_IRELAND);
+	echo renderMsg('info', array(
+      'heading' => 'AmazonSQS',
+      'body' => 'passed',
+    ));
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
@@ -183,6 +191,10 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   try {
     $cw = new AmazonCloudWatch();
     $cw->set_region(AmazonCloudWatch::REGION_IRELAND);
+	echo renderMsg('info', array(
+      'heading' => 'AmazonCloudWatch',
+      'body' => 'passed',
+    ));
   }
   catch (Exception $e) {
     echo renderMsg('error', array(
