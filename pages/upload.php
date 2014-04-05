@@ -78,7 +78,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Connect to Amazon S3.
   try {
     $s3 = new AmazonS3();
-    $s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
+    //$s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
 	echo renderMsg('info', array(
       'heading' => 'AmazonS3',
       'body' => 'passed',
