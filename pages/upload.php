@@ -103,16 +103,21 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
    ));
 
   // Upload file to S3.
-  $s3_upload_response = $s3->create_object(UARWAWS_S3_BUCKET, $filename, array(
-    'fileUpload' => $_FILES['image']['tmp_name'],
-    'contentType' => $_FILES['image']['type'],
-    'acl' => AmazonS3::ACL_PUBLIC,
-  ));
+  try {
+	  $s3_upload_response = $s3->create_object(UARWAWS_S3_BUCKET, $filename, array(
+		'fileUpload' => $_FILES['image']['tmp_name'],
+		'contentType' => $_FILES['image']['type'],
+		'acl' => AmazonS3::ACL_PUBLIC,
+	  ));
+    }
+  catch (Exception $e) {
+    echo renderMsg('error', array(
+      'heading' => 'Unable to upload file to Amazon S3',
+      'body' => var_export($e->getMessage(), TRUE),
+    ));
+    return;
+  }
   
-    echo renderMsg('info', array(
-      'heading' => 'File',
-      'body' => 's3_upload_response = '.$s3_upload_response,
-   ));
   if ($s3_upload_response->isOK()) {
     echo renderMsg('success', array(
       'body' => 'Uploaded image to Amazon S3.',
