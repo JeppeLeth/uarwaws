@@ -62,7 +62,7 @@ echo renderMsg('info', array(
 // Connect to Amazon S3.
 try {
   $s3 = new AmazonS3();
-  $s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
+  //$s3->set_region(AmazonS3::REGION_IRELAND_WEBSITE);
 }
 catch (Exception $e) {
   echo renderMsg('error', array(
