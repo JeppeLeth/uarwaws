@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Upload files to be watermarked.
+ * Upload files to be resized.
  */
 
 // ImageMagick is required to upload images.
