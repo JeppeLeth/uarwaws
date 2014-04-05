@@ -21,16 +21,20 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   try {
     $imagick = new Imagick($_FILES['image']['tmp_name']);
     $file_upload_success = TRUE;
+	echo renderMsg('info', array(
+      'heading' => 'INFO',
+      'body' => 'Test file upload success = ',
+    ));
   }
   catch (Exception $e) {
     $file_upload_success = FALSE;
+	echo renderMsg('warning', array(
+      'heading' => 'INFO',
+      'body' => 'Test file upload failed',
+    ));
   }
 
-  echo renderMsg('warning', array(
-      'heading' => 'INFO',
-      'body' => 'Test file upload = '.$file_upload_success,
-    ));
-  
+ 
   if (!$file_upload_success) {
     echo renderMsg('error', array(
       'heading' => 'Unable to read uploaded file as an image!',
