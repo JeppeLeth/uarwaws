@@ -153,6 +153,7 @@ else {
 // Connect to Amazon SimpleDB.
 try {
   $sdb = new AmazonSDB();
+  $sdb->set_region(AmazonSDB::REGION_IRELAND);
 }
 catch (Exception $e) {
   echo renderMsg('error', array(
@@ -183,6 +184,7 @@ else {
 // Connect to Amazon CloudWatch.
 try {
   $cw = new AmazonCloudWatch();
+  $cw->set_region(AmazonCloudWatch::REGION_IRELAND);
 }
 catch (Exception $e) {
   echo renderMsg('error', array(
