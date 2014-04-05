@@ -112,7 +112,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     }
   catch (Exception $e) {
     echo renderMsg('error', array(
-      'heading' => 'Unable to upload file to Amazon S3',
+      'heading' => 'Unable to upload file to Amazon S3 bucket ' . UARWAWS_S3_BUCKET,
       'body' => var_export($e->getMessage(), TRUE),
     ));
     return;
