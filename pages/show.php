@@ -45,7 +45,7 @@ if ($select_response->isOK()) {
       // Render image with height and width.
       echo '<div class="span2">';
 	  echo '<a href="' . $src . $item->Name . '" target="_blank" >';
-      echo '<img alt="' . $item->Name . '" class="img-polaroid" src="' . $src . $item_attributes['processedName'] . '" height="' . $item_attributes['processedHeight'] . '" width=' . $item_attributes['processedWidth'] . '"/>';
+      echo '<img alt="' . $item->Name . '" class="img-polaroid" src="' . $src . $item_attributes['processedName'] . '" height="' . $item_attributes['processedHeight'] . '" width="' . $item_attributes['processedWidth'] . '"/>';
 	  echo '</a>';
       echo '</div>';
     }
