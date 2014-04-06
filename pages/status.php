@@ -4,7 +4,7 @@
  * Overview of configuration and status.
  */
  
-
+/*
 $aws = Aws\Common\Aws::factory('/config/config.php');
 
 $s3v1 = $aws->get('v1.s3');
@@ -32,7 +32,7 @@ try {
 } catch (Aws\S3\Exception\S3Exception $e) {
     echo "Request failed.\n";
 }
-echo "\n";
+echo "\n";*/
 
 // Check local config.inc.php for completeness.
 if (!UARWAWS_S3_BUCKET) {
