@@ -21,16 +21,16 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   try {
     $imagick = new Imagick($_FILES['image']['tmp_name']);
     $file_upload_success = TRUE;
-	echo renderMsg('info', array(
-      'heading' => 'INFO',
-      'body' => 'Test file upload success',
+	echo renderMsg('success', array(
+      'heading' => 'Success',
+      'body' => 'Image file upload to server',
     ));
   }
   catch (Exception $e) {
     $file_upload_success = FALSE;
-	echo renderMsg('warning', array(
-      'heading' => 'INFO',
-      'body' => 'Test file upload failed',
+	echo renderMsg('error', array(
+      'heading' => 'Unable to retrieve uploaded image file',
+      'body' => 'Image file upload to server failed',
     ));
   }
 
@@ -93,9 +93,9 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   $filename = md5(time() . $_FILES['image']['name']);
   $filename .= '.' . strtolower($imagick->getImageFormat());
   
-  echo renderMsg('info', array(
-      'heading' => 'File',
-      'body' => 'file name = '.$filename . ' and temp_name = ' . $_FILES['image']['tmp_name'],
+  echo renderMsg('success', array(
+      'heading' => 'Success',
+      'body' => 'New file name for S3 = '.$filename . ' and temp_name = ' . $_FILES['image']['tmp_name'],
    ));
 
   // Upload file to S3.
@@ -238,9 +238,9 @@ if ($show_form) { ?>
     <div class="controls">
       <input type="file" name="image"/>
     </div>
-  </div>
-  <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Upload image</button>
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Upload image</button>
+	</div>
   </div>
 </form>
 <?php }
