@@ -126,3 +126,16 @@ function addWatermark(&$image) {
   $y = ($image_height - $watermark_height) / 2;
   $image->compositeImage($watermark, imagick::COMPOSITE_OVER, $x, $y);
 }
+
+/**
+ * Resize an image passed by reference.
+ * 
+ * @param Imagick $image
+ */
+function addResize(&$image) {
+  $image_width = $image->getImageWidth();
+  $image_height = $image->getImageHeight();
+
+  $image->scaleImage(0, 200);
+}
+

@@ -101,7 +101,7 @@ $finfo = finfo_open(FILEINFO_MIME_TYPE);
 $content_type = finfo_file($finfo, $temporary_file_name);
 finfo_close($finfo);
 
-// Attempt to watermark image.
+// Attempt to resize image.
 try {
   $image_to_be_watermarked = new Imagick($temporary_file_name);
 }
@@ -112,7 +112,7 @@ catch (Exception $e) {
   ));
   return;
 }
-addWatermark($image_to_be_watermarked);
+addResize($image_to_be_watermarked);
 $image_to_be_watermarked->writeImages($temporary_file_name, TRUE);
 
 // Upload watermarked image to S3.
