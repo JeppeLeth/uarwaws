@@ -1,6 +1,6 @@
 <?php
 return array(
-    'includes' => array('_aws'),
+    'includes' => array('_sdk1''),
     'services' => array(
         'default_settings' => array(
             'params' => array(
