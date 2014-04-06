@@ -4,35 +4,7 @@
  * Overview of configuration and status.
  */
  
-/*
-$aws = Aws\Common\Aws::factory('/config/config.php');
 
-$s3v1 = $aws->get('v1.s3');
-$s3v2 = $aws->get('s3');
-
-echo "ListBuckets with SDK Version 1:\n";
-echo "-------------------------------\n";
-$response = $s3v1->listBuckets();
-if ($response->isOK()) {
-    foreach ($response->body->Buckets->Bucket as $bucket) {
-        echo "- {$bucket->Name}\n";
-    }
-} else {
-    echo "Request failed.\n";
-}
-echo "\n";
-
-echo "ListBuckets with SDK Version 2:\n";
-echo "-------------------------------\n";
-try {
-    $result = $s3v2->listBuckets();
-    foreach ($result['Buckets'] as $bucket) {
-        echo "- {$bucket['Name']}\n";
-    }
-} catch (Aws\S3\Exception\S3Exception $e) {
-    echo "Request failed.\n";
-}
-echo "\n";*/
 
 // Check local config.inc.php for completeness.
 if (!UARWAWS_S3_BUCKET) {
