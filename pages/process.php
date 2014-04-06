@@ -166,6 +166,9 @@ catch (Exception $e) {
 // Update SimpleDB item to reflect that image has been watermarked.
 $keypairs = array(
   'watermark' => 'y',
+  
+  'height' => $image_to_be_watermarked->getImageHeight(),
+  'width' => $image_to_be_watermarked->getImageWidth(),
 );
 $sdb_put_response = $sdb->put_attributes(UARWAWS_SDB_DOMAIN, $image_filename, $keypairs);
 if ($sdb_put_response->isOK()) {
