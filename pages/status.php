@@ -3,19 +3,6 @@
  * @file
  * Overview of configuration and status.
  */
- 
- try {
-   $aws = Aws\Common\Aws::factory('config/config.php');
-}
-catch (Exception $e) {
-  echo renderMsg('error', array(
-    'heading' => 'Cannot connect to Amazon EC2!',
-    'body' => $e->getMessage(),
-  ));
-  return;
-}
-
-
 
 // Check local config.inc.php for completeness.
 if (!UARWAWS_S3_BUCKET) {
