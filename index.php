@@ -70,7 +70,7 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="?q=<?php echo $menu_item_default; ?>"><img src="img/favicon.ico"/> Image resizing AWS</a>
+                    <a class="brand" href="?q=<?php echo $menu_item_default; ?>"><img src="img/favicon.ico" height="16" width="16" /> Image resizing AWS</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                           <?php
