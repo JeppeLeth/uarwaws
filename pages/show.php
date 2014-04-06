@@ -42,7 +42,7 @@ if ($select_response->isOK()) {
       }
       // Render image with height and width.
       echo '<div class="span4">';
-      echo '<img alt="' . $item->Name . '" class="img-polaroid" src="https://' . UARWAWS_S3_BUCKET . '.s3.amazonaws.com/' . $item->Name . '" height="' . $item_attributes['height'] . '" width=' . $item_attributes['width'] . '"/>';
+      echo '<img alt="' . $item->Name . '" class="img-polaroid" src="https://' . UARWAWS_S3_BUCKET . '.s3.amazonaws.com/' . $item_attributes['processedName'] . '" height="' . $item_attributes['processedHeight'] . '" width=' . $item_attributes['processedWidth'] . '"/>';
       echo '</div>';
     }
     echo '</div>';

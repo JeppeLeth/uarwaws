@@ -144,10 +144,10 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Create attributes.
   $keypairs = array(
     // By default, no watermark.
-    'watermark' => 'n',
+    'processed' => 'n',
     // Use ImageMagick to determine height, width of uploaded image.
-    'height' => $imagick->getImageHeight(),
-    'width' => $imagick->getImageWidth(),
+    'orgHeight' => $imagick->getImageHeight(),
+    'orgWidth' => $imagick->getImageWidth(),
   );
 
   // Save item, keyed by the filename, in SimpleDB.

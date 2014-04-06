@@ -115,8 +115,11 @@ catch (Exception $e) {
 addResize($image_to_be_watermarked);
 $image_to_be_watermarked->writeImages($temporary_file_name, TRUE);
 
+$ext   = pathinfo($image_filename, PATHINFO_EXTENSION);
+$thumb = basename($image_filename, ".$ext") . '_thumb.' . $ext;
+
 // Upload watermarked image to S3.
-$s3_create_response = $s3->create_object(UARWAWS_S3_BUCKET, $image_filename, array(
+$s3_create_response = $s3->create_object(UARWAWS_S3_BUCKET, $thumb, array(
   'fileUpload' => $temporary_file_name,
   'contentType' => $content_type,
   'acl' => AmazonS3::ACL_PUBLIC,
@@ -165,10 +168,10 @@ catch (Exception $e) {
 
 // Update SimpleDB item to reflect that image has been watermarked.
 $keypairs = array(
-  'watermark' => 'y',
-  
-  'height' => $image_to_be_watermarked->getImageHeight(),
-  'width' => $image_to_be_watermarked->getImageWidth(),
+  'processed' => 'y',
+  'processedName' => $thumb,
+  'processedHeight' => $image_to_be_watermarked->getImageHeight(),
+  'processedWidth' => $image_to_be_watermarked->getImageWidth(),
 );
 $sdb_put_response = $sdb->put_attributes(UARWAWS_SDB_DOMAIN, $image_filename, $keypairs);
 if ($sdb_put_response->isOK()) {
