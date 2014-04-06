@@ -4,7 +4,17 @@
  * Overview of configuration and status.
  */
  
- $aws = Aws\Common\Aws::factory('/config/config.php');
+ try {
+   $aws = Aws\Common\Aws::factory('/config/config.php');
+}
+catch (Exception $e) {
+  echo renderMsg('error', array(
+    'heading' => 'Cannot connect to Amazon EC2!',
+    'body' => $e->getMessage(),
+  ));
+  return;
+}
+
 
 
 // Check local config.inc.php for completeness.
