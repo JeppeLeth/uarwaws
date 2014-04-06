@@ -21,7 +21,7 @@ catch (Exception $e) {
 $query  = 'SELECT * ';
 // SimpleDB requires `, not " when specifying the domain.
 $query .= 'FROM `' . UARWAWS_SDB_DOMAIN . '` ';
-$query .= 'WHERE watermark = "y" ';
+$query .= 'WHERE processed = "y" ';
 
 // Execute select query.
 $select_response = $sdb->select($query);
