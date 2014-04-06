@@ -43,8 +43,8 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
         <title>Image resizing AWS</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="/favicon.ico" type="image/x-icon">
+		<link rel="Shortcut Icon" type="image/x-icon" href="http://www.websitebaker.org/forum/Themes/websitebaker/favicon.ico" />
+		
 
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <style>
