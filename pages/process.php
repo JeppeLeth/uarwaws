@@ -103,7 +103,7 @@ finfo_close($finfo);
 
 // Attempt to resize image.
 try {
-  $image_to_be_watermarked = new Imagick($temporary_file_name);
+  $image_to_be_resized = new Imagick($temporary_file_name);
 }
 catch (Exception $e) {
   echo renderMsg('error', array(
@@ -112,13 +112,13 @@ catch (Exception $e) {
   ));
   return;
 }
-addResize($image_to_be_watermarked);
-$image_to_be_watermarked->writeImages($temporary_file_name, TRUE);
+addResize($image_to_be_resized);
+$image_to_be_resized->writeImages($temporary_file_name, TRUE);
 
 $ext   = pathinfo($image_filename, PATHINFO_EXTENSION);
 $thumb = basename($image_filename, ".$ext") . '_thumb.' . $ext;
 
-// Upload watermarked image to S3.
+// Upload resized thumb image to S3.
 $s3_create_response = $s3->create_object(UARWAWS_S3_BUCKET, $thumb, array(
   'fileUpload' => $temporary_file_name,
   'contentType' => $content_type,
@@ -127,12 +127,12 @@ $s3_create_response = $s3->create_object(UARWAWS_S3_BUCKET, $thumb, array(
 
 if ($s3_create_response->isOK()) {
   echo renderMsg('success', array(
-    'body' => 'Uploaded watermarked image to Amazon S3.',
+    'body' => 'Uploaded resized thumb image to Amazon S3.',
   ));
 }
 else {
   echo renderMsg('error', array(
-    'heading' => 'Unable to upload watermarked image to Amazon S3!',
+    'heading' => 'Unable to upload resized thumb image to Amazon S3!',
     'body' => getAwsError($s3_create_response),
   ));
   return;
@@ -166,12 +166,12 @@ catch (Exception $e) {
   return;
 }
 
-// Update SimpleDB item to reflect that image has been watermarked.
+// Update SimpleDB item to reflect that image has been processed.
 $keypairs = array(
   'processed' => 'y',
   'processedName' => $thumb,
-  'processedHeight' => $image_to_be_watermarked->getImageHeight(),
-  'processedWidth' => $image_to_be_watermarked->getImageWidth(),
+  'processedHeight' => $image_to_be_resized->getImageHeight(),
+  'processedWidth' => $image_to_be_resized->getImageWidth(),
 );
 $sdb_put_response = $sdb->put_attributes(UARWAWS_SDB_DOMAIN, $image_filename, $keypairs);
 if ($sdb_put_response->isOK()) {
@@ -201,7 +201,7 @@ catch (Exception $e) {
 }
 
 // Processed file count metric.
-$cw_put_metric_response = $cw->put_metric_data('Watermark', array(
+$cw_put_metric_response = $cw->put_metric_data('Resize', array(
   array(
     'MetricName' => 'ProcessedFiles',
     'Unit' => 'Count',

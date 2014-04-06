@@ -143,7 +143,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
 
   // Create attributes.
   $keypairs = array(
-    // By default, no watermark.
+    // By default, not processed.
     'processed' => 'n',
     // Use ImageMagick to determine height, width of uploaded image.
     'orgHeight' => $imagick->getImageHeight(),
@@ -208,7 +208,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   }
 
   // Uploaded file count metric.
-  $cw_put_metric_response = $cw->put_metric_data('Watermark', array(
+  $cw_put_metric_response = $cw->put_metric_data('Resize', array(
     array(
       'MetricName' => 'UploadedFiles',
       'Unit' => 'Count',
