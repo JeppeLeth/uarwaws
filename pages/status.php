@@ -3,6 +3,12 @@
  * @file
  * Overview of configuration and status.
  */
+ 
+use Aws\Common\Aws;
+use Aws\S3\Exception\S3Exception;
+
+$aws = Aws::factory('/config/config.php');
+$s3 = $aws->get('s3');
 
 // Check local config.inc.php for completeness.
 if (!UARWAWS_S3_BUCKET) {
