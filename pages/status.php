@@ -4,6 +4,7 @@
  * Overview of configuration and status.
  */
  
+ $aws = Aws\Common\Aws::factory('/config/config.php');
 
 
 // Check local config.inc.php for completeness.
