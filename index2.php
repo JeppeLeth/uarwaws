@@ -96,7 +96,7 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
             </div>
 
             <?php
-              include_once 'pages/' . $menu_current . '.php';
+              include_once 'pages2/' . $menu_current . '.php';
             ?>
 
             <hr>
