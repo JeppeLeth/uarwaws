@@ -116,8 +116,12 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   
   if ($s3_upload_response->isOK()) {
     echo renderMsg('success', array(
-      'body' => 'Uploaded image to Amazon S3.',
+      'body' => 'Uploaded image to Amazon S3.' . s3_upload_response->header,
     ));
+	
+	 foreach (s3_upload_response->header as $name => $value) {
+      echo "$name: $value\n";
+	}
     $show_form = FALSE;
   }
   else {
@@ -178,7 +182,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     return;
   }
 
-  // Send a message to the queue
+  // Send a message to the SQS queue
   $queue_url = getAwsSqsQueueUrl($sqs, UARWAWS_SQS_QUEUE);
   $sqs_send_response = $sqs->send_message($queue_url, $filename);
   if ($sqs_send_response->isOK()) {
