@@ -3,7 +3,7 @@
  * @file
  * Front controller.
  */
-define('HIDE_HTML' , TRUE);
+define('HIDE_HTML' , FALSE);
 require_once 'config.inc.php';
 require_once 'util.inc.php';
 require_once 'AWSSDKforPHP/sdk.class.php';
@@ -103,7 +103,6 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
 
             <?php
               include_once 'pages/' . $menu_current . '.php';
-			  header('Content-Type: text/html');
             ?>
 
             <hr>
