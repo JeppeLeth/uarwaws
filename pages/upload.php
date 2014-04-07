@@ -116,7 +116,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   
   if ($s3_upload_response->isOK()) {
     echo renderMsg('success', array(
-      'body' => 'Uploaded image to Amazon S3.' . $s3_upload_response->header['x-aws-requestheaders']['Date'],
+      'body' => 'Uploaded image to Amazon S3.' . $s3_upload_response->header['x-aws-requestheaders']['Date'] . '   ' . get_the_time('c'),
     ));
 	echo "<pre>";
 	print_r($s3_upload_response->header);
