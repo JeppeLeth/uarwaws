@@ -14,7 +14,7 @@ if (!extension_loaded('imagick')) {
 }
 
 // Use long pulling except if the caller want immediate response, which can be set in the request parameters
-$waitTimeSeconds = ( isset($_REQUEST['immediately']) ? 0 : 20 );
+$waitTimeSeconds = ( isset($_REQUEST['immediately']) ? 2 : 20 );
 
 // Connect to Amazon Simple Queue Service.
 try {
