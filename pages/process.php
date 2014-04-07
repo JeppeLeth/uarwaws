@@ -46,19 +46,19 @@ if (!$received_sqs_response->isOK()) {
 $image_filename = (string) $received_sqs_response->body->ReceiveMessageResult->Message->Body;
 
 if (!$image_filename) {
-  echo renderMsg('info', array(
+  renderMsgAndEcho('info', array(
     'heading' => 'No images to process.',
     'body' => 'Upload images that need resized before processing the queue.',
   ));
   return;
 }
 else {
-  echo renderMsg('info', "Processing $image_filename");
+  renderMsgAndEcho('info', "Processing $image_filename");
 }
 
 // Get the receipt handle; required when deleting a message.
 $receipthandle = (string) $received_sqs_response->body->ReceiveMessageResult->Message->ReceiptHandle;
-echo renderMsg('info', array(
+renderMsgAndEcho'info', array(
   'heading' => 'ReceiptHandle:',
   'body' => substr($receipthandle, 0, 80) . ' ...',
 ));
@@ -88,7 +88,7 @@ $s3_get_response = $s3->get_object(UARWAWS_S3_BUCKET, $image_filename, array(
 fclose($file_resource);
 
 if ($s3_get_response->isOK()) {
-  echo renderMsg('success', array(
+  renderMsgAndEcho('success', array(
     'body' => 'Downloaded image from Amazon S3.',
   ));
 }
@@ -130,7 +130,7 @@ $s3_create_response = $s3->create_object(UARWAWS_S3_BUCKET, $thumb, array(
 ));
 
 if ($s3_create_response->isOK()) {
-  echo renderMsg('success', array(
+  renderMsgAndEcho('success', array(
     'body' => 'Uploaded resized thumb image to Amazon S3.',
   ));
 }
@@ -145,7 +145,7 @@ else {
 // Image has been processed; delete from SQS queue.
 $sqs_delete_response = $sqs->delete_message($queue_url, $receipthandle);
 if ($sqs_delete_response->isOK()) {
-  echo renderMsg('success', array(
+  renderMsgAndEcho('success', array(
     'body' => 'Deleted message from queue.',
   ));
 }
@@ -179,7 +179,7 @@ $keypairs = array(
 );
 $sdb_put_response = $sdb->put_attributes(UARWAWS_SDB_DOMAIN, $image_filename, $keypairs);
 if ($sdb_put_response->isOK()) {
-  echo renderMsg('success', array(
+  renderMsgAndEcho('success', array(
     'body' => 'Item updated in Amazon SimpleDB.',
   ));
 }
@@ -214,7 +214,7 @@ $cw_put_metric_response = $cw->put_metric_data('Resize', array(
 ));
 
 if ($cw_put_metric_response->isOK()) {
-  echo renderMsg('success', array(
+  renderMsgAndEcho('success', array(
     'body' => 'Processed file metric added to CloudWatch.',
   ));
 }
