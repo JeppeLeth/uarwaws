@@ -35,10 +35,6 @@ $received_sqs_response = $sqs->receive_message($queue_url, array(
   'WaitTimeSeconds' => $waitTimeSeconds,
 ));
 
-echo "<pre>";
-print_r($received_sqs_response);
-echo "</pre>";
-
 if (!$received_sqs_response->isOK()) {
   echo renderMsg('error', array(
     'heading' => 'Unable to get messages from SQS queue!',
@@ -46,8 +42,6 @@ if (!$received_sqs_response->isOK()) {
   ));
   return;
 }
-
-
 
 $count = count($received_sqs_response->body->ReceiveMessageResult->Message);
 if ( $count == 0) {
@@ -63,7 +57,10 @@ else {
 
 foreach ($received_sqs_response->body->ReceiveMessageResult->Message as $index => $message) { 
 	$image_filename = (string) $message->Body;
-	renderMsgAndEcho('info', "Processing $image_filename");
+	renderMsgAndEcho('info', array(
+	  'heading' => 'Processing image no. ' . ($index + 1),
+	  'body' => 'File name = $image_filename',
+	));
 	
 	// Get the receipt handle; required when deleting a message.
 	$receipthandle = (string) $message->ReceiptHandle;
