@@ -13,6 +13,9 @@ if (!extension_loaded('imagick')) {
   return;
 }
 
+// Use long pulling except if the caller want immediate response, which can be set in the request parameters
+$waitTimeSeconds = ( isset($_REQUEST['immediately']) ? 0 : 20 );
+
 // Connect to Amazon Simple Queue Service.
 try {
   $sqs = new AmazonSQS();
@@ -29,7 +32,7 @@ catch (Exception $e) {
 $queue_url = getAwsSqsQueueUrl($sqs, UARWAWS_SQS_QUEUE);
 $received_sqs_response = $sqs->receive_message($queue_url, array(
   'MaxNumberOfMessages' => 1,
-  'WaitTimeSeconds' => 0,
+  'WaitTimeSeconds' => $waitTimeSeconds,
 ));
 
 if (!$received_sqs_response->isOK()) {

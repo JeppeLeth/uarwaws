@@ -12,18 +12,22 @@ $menu_item_default = 'status';
 $menu_items = array(
   'status' => array(
     'label' => 'Status',
+	'queryParams' => '',
     'desc' => 'Overview of configuration and status',
   ),
   'show' => array(
     'label' => 'Show',
+	'queryParams' => '&limit=50',
     'desc' => 'Show all resized images',
   ),
   'upload' => array(
     'label' => 'Upload',
+	'queryParams' => '',
     'desc' => 'Upload files to be resized',
   ),
   'process' => array(
     'label' => 'Process',
+	'queryParams' => '&immediately',
     'desc' => 'Resize images',
   ),
 );
@@ -76,7 +80,7 @@ if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
                           <?php
                           foreach ($menu_items as $item => $item_data) {
                             echo '<li' . ($item == $menu_current ? ' class="active"' : '') . '>';
-                            echo '<a href="?q=' . $item . '" title="' . $item_data['desc'] . '">' . $item_data['label'] . '</a>';
+                            echo '<a href="?q=' . $item . $item_data['queryParams'] . '" title="' . $item_data['desc'] . '">' . $item_data['label'] . '</a>';
                             echo '</li>';
                           }
                           ?>
