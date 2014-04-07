@@ -38,6 +38,7 @@ $menu_current = $menu_item_default;
 if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
   $menu_current = $_REQUEST['q'];
 }
+header('Content-Type: text/html');
 ?>
 <!DOCTYPE html>
 <html class="no-js">
