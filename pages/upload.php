@@ -13,7 +13,7 @@ if (!extension_loaded('imagick')) {
   return;
 }
 
-$show_form = TRUE;
+$show_form = TRUE && !$hide_html;
 
 // If a file has been uploaded...
 if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
@@ -93,7 +93,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   $filename = md5(time() . $_FILES['image']['name']);
   $filename .= '.' . strtolower($imagick->getImageFormat());
   
-  echo renderMsg('success', array(
+  renderMsgAndEcho('success', array(
       'heading' => 'Success',
       'body' => 'New file name for S3 = '.$filename . ' and temp_name = ' . $_FILES['image']['tmp_name'],
    ));
@@ -115,7 +115,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   }
   
   if ($s3_upload_response->isOK()) {
-    echo renderMsg('success', array(
+    renderMsgAndEcho('success', array(
       'body' => 'Uploaded image to Amazon S3.',
     ));
     $show_form = FALSE;
@@ -154,7 +154,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   // Save item, keyed by the filename, in SimpleDB.
   $sdb_put_response = $sdb->put_attributes(UARWAWS_SDB_DOMAIN, $filename, $keypairs);
   if ($sdb_put_response->isOK()) {
-    echo renderMsg('success', array(
+    renderMsgAndEcho('success', array(
       'body' => 'Item added to Amazon SimpleDB.',
     ));
   }
@@ -183,7 +183,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   $queue_url = getAwsSqsQueueUrl($sqs, UARWAWS_SQS_QUEUE);
   $sqs_send_response = $sqs->send_message($queue_url, $filename);
   if ($sqs_send_response->isOK()) {
-    echo renderMsg('success', array(
+    renderMsgAndEcho('success', array(
       'body' => 'Filename added to SQS queue for processing.',
     ));
   }
@@ -218,7 +218,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   ));
 
   if ($cw_put_metric_response->isOK()) {
-    echo renderMsg('success', array(
+    renderMsgAndEcho('success', array(
       'body' => 'Uploaded file metric added to CloudWatch.',
     ));
   }
