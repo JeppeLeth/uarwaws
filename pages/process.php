@@ -35,6 +35,10 @@ $received_sqs_response = $sqs->receive_message($queue_url, array(
   'WaitTimeSeconds' => $waitTimeSeconds,
 ));
 
+echo "<pre>";
+print_r($received_sqs_response);
+echo "</pre>";
+
 if (!$received_sqs_response->isOK()) {
   echo renderMsg('error', array(
     'heading' => 'Unable to get messages from SQS queue!',
@@ -42,10 +46,6 @@ if (!$received_sqs_response->isOK()) {
   ));
   return;
 }
-
-echo "<pre>";
-print_r($received_sqs_response->body->ReceiveMessageResult);
-echo "</pre>";
 
 $image_filename = (string) $received_sqs_response->body->ReceiveMessageResult->Message->Body;
 
