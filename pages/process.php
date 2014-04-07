@@ -59,11 +59,12 @@ else {
   renderMsgAndEcho('info', "Processing number of messages : $count");
 }
 
+$i = 0;
 foreach ($received_sqs_response->body->ReceiveMessageResult->Message as $index => $message) { 
 	$image_filename = (string) $message->Body;
 	renderMsgAndEcho('info', array(
-	  'heading' => 'Processing image no. ' . ($index + 1),
-	  'body' => 'File name = $image_filename',
+	  'heading' => 'Processing image no. ' . (++$i),
+	  'body' => "File name = $image_filename",
 	));
 	
 	// Get the receipt handle; required when deleting a message.
