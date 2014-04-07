@@ -115,9 +115,9 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   }
   
   if ($s3_upload_response->isOK()) {
-	$iso8601_date = get_the_time('c');
+	$timestamp_format = 'Y-m-d\TH:i:s\Z';
     echo renderMsg('success', array(
-      'body' => 'Uploaded image to Amazon S3.' . $s3_upload_response->header['x-aws-requestheaders']['Date'] . '   ' .  $iso8601_date,
+      'body' => 'Uploaded image to Amazon S3.' . $s3_upload_response->header['x-aws-requestheaders']['Date'] . '   ' .  gmdate($timestamp_format, time());,
     ));
 	echo "<pre>";
 	print_r($s3_upload_response->header);
