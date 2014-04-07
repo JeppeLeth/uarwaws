@@ -60,16 +60,22 @@ if ($select_response->isOK()) {
 	if (!HIDE_HTML) {
 		echo '</div>';
 	} else {
+		header('Content-Type: application/json');
 		echo json_encode(array( 'imageList' => $imageList)); 
 	}
     
   }
   // No items.
   else {
-    renderMsgAndEcho('info', array(
+  	if (!HIDE_HTML) {
+		renderMsgAndEcho('info', array(
       'heading' => 'No resized images found.',
       'body' => 'If you have uploaded an image, remember to process it.',
     ));
+	} else {
+		header('Content-Type: application/json');
+		echo json_encode(array( 'imageList' => array())); 
+	}
   }
 }
 else {
