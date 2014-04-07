@@ -18,7 +18,7 @@ catch (Exception $e) {
 }
 
 if (isset($_REQUEST['limit']) && $_REQUEST['limit'] > 0 && $_REQUEST['limit'] <= 250 ) {
-	$limit = $_REQUEST['q'];
+	$limit = $_REQUEST['limit'];
 } else {
 	$limit = 50;
 }
