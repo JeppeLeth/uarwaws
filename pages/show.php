@@ -21,7 +21,7 @@ catch (Exception $e) {
 $query  = 'SELECT * ';
 // SimpleDB requires `, not " when specifying the domain.
 $query .= 'FROM `' . UARWAWS_SDB_DOMAIN . '` ';
-$query .= 'WHERE processed = "y" ';
+$query .= 'WHERE processed = "y" AND `uploadedDate` is not null order by `uploadedDate` DESC';
 
 // Execute select query.
 $select_response = $sdb->select($query);

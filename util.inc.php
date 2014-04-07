@@ -63,7 +63,7 @@ function getAwsSqsQueueUrl($sqs, $queue_name) {
  *   array - Keys heading, body.
  */
 function renderMsgAndEcho($type, $content) {
-	if (!$hide_html) {
+	if (HIDE_HTML) {
 		echo renderMsg($type, $content);
 	}
 }
