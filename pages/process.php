@@ -43,6 +43,10 @@ if (!$received_sqs_response->isOK()) {
   return;
 }
 
+echo "<pre>";
+print_r($received_sqs_response->body->ReceiveMessageResult);
+echo "</pre>";
+
 $image_filename = (string) $received_sqs_response->body->ReceiveMessageResult->Message->Body;
 
 if (!$image_filename) {
