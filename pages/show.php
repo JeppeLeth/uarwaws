@@ -30,9 +30,12 @@ if ($select_response->isOK()) {
   // If there are more than one item...
   if (count($select_response->body->SelectResult->Item)) {
     // Display in a fluid row.
-    echo '<div class="row-fluid">';
+	if (!HIDE_HTML) {
+		echo '<div class="row-fluid">';
+	}
 	
 	$src = 'https://' . UARWAWS_S3_BUCKET . '.s3.amazonaws.com/';
+	$imageList = array();
     foreach ($select_response->body->SelectResult->Item as $item) {
       // CFSimpleXML and SimpleDB makes it a little difficult to just access
       // attributes by key / value, so I'm just arbitrarily adding them all
@@ -42,18 +45,28 @@ if ($select_response->isOK()) {
         $attribute_stdClass = $attribute->to_stdClass();
         $item_attributes[$attribute_stdClass->Name] = $attribute_stdClass->Value;
       }
-      // Render image with height and width.
-      echo '<div class="span2">';
-	  echo '<a href="' . $src . $item->Name . '" target="_blank" >';
-      echo '<img alt="' . $item->Name . '" class="img-polaroid" src="' . $src . $item_attributes['processedName'] . '" height="' . $item_attributes['processedHeight'] . '" width="' . $item_attributes['processedWidth'] . '"/>';
-	  echo '</a>';
-      echo '</div>';
+	  
+	  if (!HIDE_HTML) {
+		  // Render image with height and width.
+		  echo '<div class="span2">';
+		  echo '<a href="' . $src . $item->Name . '" target="_blank" >';
+		  echo '<img alt="' . $item->Name . '" class="img-polaroid" src="' . $src . $item_attributes['processedName'] . '" height="' . $item_attributes['processedHeight'] . '" width="' . $item_attributes['processedWidth'] . '"/>';
+		  echo '</a>';
+		  echo '</div>';
+	  } else {
+			$imageList[] = array('orgUrl' => $src . $item->Name, 'thumbUrl' => $src . $item_attributes['processedName']);
+	  }
     }
-    echo '</div>';
+	if (!HIDE_HTML) {
+		echo '</div>';
+	} else {
+		echo json_encode(array( 'imageList' => $imageList)); 
+	}
+    
   }
   // No items.
   else {
-    echo renderMsg('info', array(
+    renderMsgAndEcho('info', array(
       'heading' => 'No resized images found.',
       'body' => 'If you have uploaded an image, remember to process it.',
     ));
