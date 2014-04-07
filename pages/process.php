@@ -29,6 +29,7 @@ catch (Exception $e) {
 $queue_url = getAwsSqsQueueUrl($sqs, UARWAWS_SQS_QUEUE);
 $received_sqs_response = $sqs->receive_message($queue_url, array(
   'MaxNumberOfMessages' => 1,
+  'WaitTimeSeconds' => 20,
 ));
 
 if (!$received_sqs_response->isOK()) {
