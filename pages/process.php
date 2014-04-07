@@ -47,6 +47,15 @@ if (!$received_sqs_response->isOK()) {
   return;
 }
 
+
+
+foreach ($received_sqs_response->body->ReceiveMessageResult->Message as $message) { 
+  renderMsgAndEcho('info', array(
+    'heading' => 'body',
+    'body' => 'file name = ' . (string) $message->Body,
+  ));
+}
+
 $image_filename = (string) $received_sqs_response->body->ReceiveMessageResult->Message->Body;
 
 if (!$image_filename) {
