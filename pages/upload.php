@@ -13,7 +13,7 @@ if (!extension_loaded('imagick')) {
   return;
 }
 
-$show_form = TRUE && !$hide_html;
+$show_form = TRUE && $hide_html;
 
 // If a file has been uploaded...
 if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
