@@ -38,7 +38,7 @@ $menu_current = $menu_item_default;
 if (isset($_REQUEST['q']) && array_key_exists($_REQUEST['q'], $menu_items)) {
   $menu_current = $_REQUEST['q'];
 }
-header('Content-Type: text/html');
+
 ?>
 <!DOCTYPE html>
 <html class="no-js">
@@ -103,6 +103,7 @@ header('Content-Type: text/html');
 
             <?php
               include_once 'pages/' . $menu_current . '.php';
+			  header('Content-Type: text/html');
             ?>
 
             <hr>
