@@ -54,6 +54,21 @@ function getAwsSqsQueueUrl($sqs, $queue_name) {
 }
 
 /**
+ * Convienience function to echo message from renderMsg().
+ *
+ * @param string $type
+ *   Message type; error, ok, question, warning, info.
+ * @param mixed $content
+ *   string - The contents of the message.
+ *   array - Keys heading, body.
+ */
+function renderMsgAndEcho($type, $content) {
+	if (!$hide_html) {
+		echo renderMsg($type, $content);
+	}
+}
+
+/**
  * Render an HTML message.
  *
  * @param string $type

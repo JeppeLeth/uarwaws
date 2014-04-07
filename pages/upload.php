@@ -21,12 +21,10 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   try {
     $imagick = new Imagick($_FILES['image']['tmp_name']);
     $file_upload_success = TRUE;
-	if (!$hide_html) {
-		echo renderMsg('success', array(
-		  'heading' => 'Success',
-		  'body' => 'Image file upload to server',
-		));
-	}
+	renderMsgAndEcho('success', array(
+      'heading' => 'Success',
+      'body' => 'Image file upload to server',
+    ));
   }
   catch (Exception $e) {
     $file_upload_success = FALSE;
