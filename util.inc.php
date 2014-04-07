@@ -37,7 +37,7 @@ function getAwsError($response) {
  * @return string
  */
 function convertTimeToISO8601($timestamp) {
-	return gmdate('Y-m-d\TH:i:s\Z', $timestamp);
+	return gmdate('Y-m-d\TH:i:s\Z', strtotime($timestamp));
 }
 
 /**

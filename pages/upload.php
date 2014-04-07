@@ -118,9 +118,6 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     echo renderMsg('success', array(
       'body' => 'Uploaded image to Amazon S3.',
     ));
-	echo "<pre>";
-	print_r($s3_upload_response->header);
-	echo "</pre>";
     $show_form = FALSE;
   }
   else {
@@ -148,7 +145,7 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
   $keypairs = array(
     // By default, not processed.
     'processed' => 'n',
-	'uploadedDate' => convertTimeToISO8601(strtotime($s3_upload_response->header['x-aws-requestheaders']['Date'])),
+	'uploadedDate' => convertTimeToISO8601($s3_upload_response->header['x-aws-requestheaders']['Date']),
     // Use ImageMagick to determine height, width of uploaded image.
     'orgHeight' => $imagick->getImageHeight(),
     'orgWidth' => $imagick->getImageWidth(),
