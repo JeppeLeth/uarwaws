@@ -118,7 +118,9 @@ if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
     echo renderMsg('success', array(
       'body' => 'Uploaded image to Amazon S3.' . $s3_upload_response->header,
     ));
-	
+	echo "<pre>";
+	print_r($s3_upload_response->header);
+	echo "</pre>";
 	 foreach ($s3_upload_response->header as $name => $value) {
       echo "$name: $value\n";
 	}
