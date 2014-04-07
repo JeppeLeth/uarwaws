@@ -31,6 +31,16 @@ function getAwsError($response) {
 }
 
 /**
+ * Convert time to ISO 8601 format.
+ *
+ * @param integer $timestamp
+ * @return string
+ */
+function convertTimeToISO8601($timestamp) {
+	return gmdate('Y-m-d\TH:i:s\Z', $timestamp);
+}
+
+/**
  * Get queue full URL.
  *
  * @param AmazonSQS $sqs
