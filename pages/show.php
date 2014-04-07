@@ -17,10 +17,10 @@ catch (Exception $e) {
   return;
 }
 
-if (isset($_REQUEST['limit']) && $_REQUEST['limit'] > 0 && $_REQUEST['limit'] <= 250 ) {
-	$limit = $_REQUEST['limit'];
-} else {
-	$limit = 50;
+$limit = 50;
+ // Ensure that the caller can specify a max number of images. The number must be between 1 and 250. Default is 50.
+if (isset($_REQUEST['limit']) && ctype_digit($_REQUEST['limit'])) {
+	$limit = ($_REQUEST['limit'] > 0 && $_REQUEST['limit'] <= 250 ? $_REQUEST['limit'] : $limit);
 }
 
 // Build select query.
