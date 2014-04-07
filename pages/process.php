@@ -58,7 +58,7 @@ else {
 
 // Get the receipt handle; required when deleting a message.
 $receipthandle = (string) $received_sqs_response->body->ReceiveMessageResult->Message->ReceiptHandle;
-renderMsgAndEcho'info', array(
+renderMsgAndEcho('info', array(
   'heading' => 'ReceiptHandle:',
   'body' => substr($receipthandle, 0, 80) . ' ...',
 ));
