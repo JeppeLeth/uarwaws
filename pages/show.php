@@ -61,8 +61,8 @@ if ($select_response->isOK()) {
 		  echo '</div>';
 	  } else {
 			$imageList[] = array(
-				'image' => array( 'url' => $src . $item->Name, 'height' => $item_attributes['orgHeight'], 'width' => $item_attributes['orgWidth']),
-				'thumb' => array( 'url' => $src . $item_attributes['processedName'], 'height' => $item_attributes['processedHeight'], 'width' => $item_attributes['processedWidth'])
+				'image' => array( 'url' => $src . $item->Name, 'height' => intval($item_attributes['orgHeight']), 'width' => intval($item_attributes['orgWidth'])),
+				'thumb' => array( 'url' => $src . $item_attributes['processedName'], 'height' => intval($item_attributes['processedHeight']), 'width' => intval($item_attributes['processedWidth']))
 			);
 	  }
     }
