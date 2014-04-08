@@ -60,7 +60,10 @@ if ($select_response->isOK()) {
 		  echo '</a>';
 		  echo '</div>';
 	  } else {
-			$imageList[] = array('orgUrl' => $src . $item->Name, 'thumbUrl' => $src . $item_attributes['processedName']);
+			$imageList[] = array(
+				'image' => array( 'url' => $src . $item->Name, 'height' => $item_attributes['orgHeight'], 'width' => $item_attributes['orgWidth']),
+				'thumb' => array( 'url' => $src . $item_attributes['processedName'], 'height' => $item_attributes['processedHeight'], 'width' => $item_attributes['processedWidth'])
+			);
 	  }
     }
 	if (!HIDE_HTML) {
